@@ -22,7 +22,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version."
   type        = string
-  default     = "0.9.3"
+  default     = "0.12.1"
 }
 
 variable "chart_namespace" {
@@ -151,107 +151,8 @@ variable "listener_podspec_map" {
 # Default spec map for dind container mode
 variable "custom_podspec_map" {
   description = "Custom podspec map"
-  type = object({
-    metadata = any
-    spec     = any
-  })
-  default = {
-    metadata = {
-      labels = {
-      }
-    }
-    spec = {
-      # imagePullSecrets = [
-      #   {
-      #     name = "regcred"
-      #   }
-      # ]
-      initContainers = [
-        {
-          name    = "init-dind-externals",
-          image   = "ghcr.io/actions/actions-runner:latest",
-          command = ["cp", "-r", "-v", "/home/runner/externals/.", "/home/runner/tmpDir/"],
-          volumeMounts = [
-            {
-              name      = "dind-externals",
-              mountPath = "/home/runner/tmpDir"
-            }
-          ]
-        }
-      ]
-      topology_spread_constraints = []
-
-      tolerations = []
-      affinity    = {}
-      containers = [
-        {
-          name    = "runner",
-          image   = "ghcr.io/actions/actions-runner:latest",
-          command = ["/home/runner/run.sh"],
-          env = [
-            {
-              name  = "DOCKER_HOST",
-              value = "unix:///var/run/docker.sock"
-            }
-          ],
-          volumeMounts = [
-            {
-              name      = "work",
-              mountPath = "/home/runner/_work"
-            },
-            {
-              name      = "dind-sock",
-              mountPath = "/var/run",
-              readOnly  = true
-            }
-          ]
-        },
-        {
-          name  = "dind",
-          image = "docker:dind",
-          args  = ["dockerd", "--host=unix:///var/run/docker.sock", "--group=$(DOCKER_GROUP_GID)"],
-          env = [
-            {
-              name  = "DOCKER_GROUP_GID",
-              value = "123"
-            }
-          ],
-          securityContext = {
-            privileged = true
-          },
-          volumeMounts = [
-            {
-              name      = "work",
-              mountPath = "/home/runner/_work"
-            },
-            {
-              name      = "dind-sock",
-              mountPath = "/run/docker"
-            },
-            {
-              name      = "dind-externals",
-              mountPath = "/home/runner/externals"
-            }
-          ]
-        }
-      ],
-      volumes = [
-        {
-          name     = "work",
-          emptyDir = {}
-        },
-        {
-          name     = "dind-sock",
-          emptyDir = {}
-        },
-        {
-          name     = "dind-externals",
-          emptyDir = {}
-        }
-      ]
-    }
-  }
-
+  type        = any
+  default     = {}
 }
 
 variable "controller_service_account" {
@@ -261,4 +162,28 @@ variable "controller_service_account" {
     namespace = "arc-systems"
     name      = "actions-runner-controller"
   }
+}
+
+variable "topology_spread_constraints" {
+  description = "Topology spread constraints for the pods."
+  type        = list(any)
+  default     = []
+}
+
+variable "node_selector" {
+  description = "Node selector for the pods."
+  type        = map(any)
+  default     = {}
+}
+
+variable "tolerations" {
+  description = "Tolerations for the pods."
+  type        = list(any)
+  default     = []
+}
+
+variable "affinity" {
+  description = "Affinity for the pods."
+  type        = map(any)
+  default     = {}
 }

@@ -32,8 +32,114 @@ locals {
 
     container_mode_type        = var.container_mode_type
     listener_template_spec     = yamlencode(var.listener_podspec_map)
-    template_spec              = yamlencode(var.custom_podspec_map)
+    template_spec              = var.custom_podspec_map != {} ? yamlencode(var.custom_podspec_map) : yamlencode(local.template_spec)
     controller_service_account = yamlencode(var.controller_service_account)
   }
 
+  template_spec = {
+    metadata = {
+      labels = {}
+    }
+    spec = {
+      topologySpreadConstraints = var.topology_spread_constraints
+      nodeSelector              = var.node_selector
+      tolerations               = var.tolerations
+      affinity                  = var.affinity
+
+      initContainers = [
+        {
+          name    = "init-dind-externals",
+          image   = "ghcr.io/actions/actions-runner:latest",
+          command = ["cp", "-r", "-v", "/home/runner/externals/.", "/home/runner/tmpDir/"],
+          volumeMounts = [
+            {
+              name      = "dind-externals",
+              mountPath = "/home/runner/tmpDir"
+            }
+          ]
+        }
+      ]
+
+      containers = [
+        {
+          name    = "runner"
+          image   = "ghcr.io/actions/actions-runner:latest"
+          command = ["/home/runner/run.sh"]
+          env = [
+            {
+              name  = "DOCKER_HOST",
+              value = "unix:///var/run/docker.sock"
+            },
+            {
+              name  = "RUNNER_WAIT_FOR_DOCKER_IN_SECONDS"
+              value = "120"
+            },
+          ]
+          volumeMounts = [
+            {
+              name      = "work",
+              mountPath = "/home/runner/_work"
+            },
+            {
+              name      = "dind-sock",
+              mountPath = "/var/run",
+              readOnly  = true
+            },
+          ]
+        },
+        {
+          name  = "dind"
+          image = "docker:dind"
+          args  = ["dockerd", "--host=unix:///var/run/docker.sock", "--group=$(DOCKER_GROUP_GID)"]
+          env = [
+            {
+              name  = "DOCKER_GROUP_GID",
+              value = "123"
+            },
+          ]
+          securityContext = {
+            privileged = true
+          }
+          restartPolicy = "Always"
+          startupProbe = {
+            exec = {
+              command = ["docker", "info"]
+            }
+            initialDelaySeconds = 0
+            failureThreshold    = 24
+            periodSeconds       = 10
+          }
+          volumeMounts = [
+            {
+              name      = "work",
+              mountPath = "/home/runner/_work"
+            },
+            {
+              name      = "dind-sock",
+              mountPath = "/run/docker"
+            },
+            {
+              name      = "dind-externals",
+              mountPath = "/home/runner/externals"
+            }
+          ]
+        }
+      ]
+
+      volumes = [
+        {
+          name     = "work"
+          emptyDir = {}
+        },
+        {
+          name     = "dind-sock"
+          emptyDir = {}
+        },
+        {
+          name     = "dind-externals"
+          emptyDir = {}
+        },
+      ]
+    }
+  }
 }

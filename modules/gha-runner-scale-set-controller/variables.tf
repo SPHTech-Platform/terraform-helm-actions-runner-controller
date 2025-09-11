@@ -22,7 +22,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version."
   type        = string
-  default     = "0.9.3"
+  default     = "0.12.1"
 }
 
 variable "chart_namespace" {
@@ -147,8 +147,14 @@ variable "controller_tolerations" {
 
 variable "controller_affinity" {
   description = "Set the controller pod affinity rules."
-  type        = any
+  type        = map(any)
   default     = {}
+}
+
+variable "controller_topology_spread_constraints" {
+  description = "Set the controller pod topology spread constraints."
+  type        = list(any)
+  default     = []
 }
 
 variable "controller_priority_class_name" {
@@ -165,6 +171,18 @@ variable "log_level" {
 
 variable "controller_image_tag" {
   description = "The tag of the controller container. If not specified, it's the appVersion inside Chart.yaml"
+  type        = string
+  default     = ""
+}
+
+variable "runner_max_concurrent_reconciles" {
+  description = "The maximum number of concurrent reconciles which can be run by the EphemeralRunner controller."
+  type        = number
+  default     = 2
+}
+
+variable "namespace_override" {
+  description = "Overrides the default `.Release.Namespace` for all resources in this chart."
   type        = string
   default     = ""
 }
