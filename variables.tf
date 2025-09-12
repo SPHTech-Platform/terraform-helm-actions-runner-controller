@@ -111,25 +111,25 @@ variable "github_token" {
 
 variable "controller_node_selector" {
   description = "Node selector for the controller pod"
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "controller_tolerations" {
   description = "Tolerations for the controller pod"
-  type        = list(any)
+  type        = any
   default     = []
 }
 
 variable "controller_affinity" {
   description = "Affinity for the controller pod"
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "controller_topology_spread_constraints" {
   description = "Topology spread constraints for the controller pod"
-  type        = list(any)
+  type        = any
   default     = []
 }
 
@@ -141,24 +141,24 @@ variable "runner_custom_podspec_map" {
 
 variable "runner_node_selector" {
   description = "Node selector for the runner pods"
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "runner_tolerations" {
   description = "Tolerations for the runner pods"
-  type        = list(any)
+  type        = any
   default     = []
 }
 
 variable "runner_affinity" {
   description = "Affinity for the runner pods"
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "runner_topology_spread_constraints" {
   description = "Topology spread constraints for the runner pods"
-  type        = list(any)
+  type        = any
   default     = []
 }
