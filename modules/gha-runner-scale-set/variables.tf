@@ -166,24 +166,24 @@ variable "controller_service_account" {
 
 variable "topology_spread_constraints" {
   description = "Topology spread constraints for the pods."
-  type        = list(any)
+  type        = any
   default     = []
 }
 
 variable "node_selector" {
   description = "Node selector for the pods."
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "tolerations" {
   description = "Tolerations for the pods."
-  type        = list(any)
+  type        = any
   default     = []
 }
 
 variable "affinity" {
   description = "Affinity for the pods."
-  type        = map(any)
+  type        = any
   default     = {}
 }

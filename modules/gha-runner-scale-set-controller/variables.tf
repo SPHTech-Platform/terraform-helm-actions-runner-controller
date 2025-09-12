@@ -135,25 +135,25 @@ variable "controller_security_context" {
 
 variable "controller_node_selector" {
   description = "Set the controller pod nodeSelector."
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "controller_tolerations" {
   description = "Set the controller pod tolerations."
-  type        = list(any)
+  type        = any
   default     = []
 }
 
 variable "controller_affinity" {
   description = "Set the controller pod affinity rules."
-  type        = map(any)
+  type        = any
   default     = {}
 }
 
 variable "controller_topology_spread_constraints" {
   description = "Set the controller pod topology spread constraints."
-  type        = list(any)
+  type        = any
   default     = []
 }
 
