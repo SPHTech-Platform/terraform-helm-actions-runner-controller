@@ -39,5 +39,5 @@ module "action_runner_scale_set" {
   topology_spread_constraints = var.runner_topology_spread_constraints
   affinity                    = var.runner_affinity
 
-  custom_podspec_map = var.runner_custom_podspec_map
+  template_spec_metadata_labels = var.runner_template_spec_metadata_labels
 }

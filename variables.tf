@@ -133,8 +133,8 @@ variable "controller_topology_spread_constraints" {
   default     = []
 }
 
-variable "runner_custom_podspec_map" {
-  description = "Custom podspec overrides for the runner"
+variable "runner_template_spec_metadata_labels" {
+  description = "Labels to be added to the pod template metadata."
   type        = any
   default     = {}
 }

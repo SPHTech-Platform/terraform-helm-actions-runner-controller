@@ -192,10 +192,10 @@ No resources.
 | <a name="input_max_runners"></a> [max\_runners](#input\_max\_runners) | Maximum number of runners to scale to | `number` | `3` | no |
 | <a name="input_min_runners"></a> [min\_runners](#input\_min\_runners) | Minimum number of runners to scale to | `number` | `1` | no |
 | <a name="input_runner_affinity"></a> [runner\_affinity](#input\_runner\_affinity) | Affinity for the runner pods | `any` | `{}` | no |
-| <a name="input_runner_custom_podspec_map"></a> [runner\_custom\_podspec\_map](#input\_runner\_custom\_podspec\_map) | Custom podspec overrides for the runner | `any` | `{}` | no |
 | <a name="input_runner_group"></a> [runner\_group](#input\_runner\_group) | Name of the runner group | `string` | n/a | yes |
 | <a name="input_runner_node_selector"></a> [runner\_node\_selector](#input\_runner\_node\_selector) | Node selector for the runner pods | `any` | `{}` | no |
 | <a name="input_runner_scale_set_name"></a> [runner\_scale\_set\_name](#input\_runner\_scale\_set\_name) | Name of the scale set | `string` | n/a | yes |
+| <a name="input_runner_template_spec_metadata_labels"></a> [runner\_template\_spec\_metadata\_labels](#input\_runner\_template\_spec\_metadata\_labels) | Labels to be added to the pod template metadata. | `any` | `{}` | no |
 | <a name="input_runner_tolerations"></a> [runner\_tolerations](#input\_runner\_tolerations) | Tolerations for the runner pods | `any` | `[]` | no |
 | <a name="input_runner_topology_spread_constraints"></a> [runner\_topology\_spread\_constraints](#input\_runner\_topology\_spread\_constraints) | Topology spread constraints for the runner pods | `any` | `[]` | no |
 | <a name="input_scale_set_release_name"></a> [scale\_set\_release\_name](#input\_scale\_set\_release\_name) | Helm release name for the scale set | `string` | `"gha-scale-set"` | no |

@@ -149,8 +149,8 @@ variable "listener_podspec_map" {
 }
 
 # Default spec map for dind container mode
-variable "custom_podspec_map" {
-  description = "Custom podspec map"
+variable "template_spec_metadata_labels" {
+  description = "Labels to be added to the pod template metadata."
   type        = any
   default     = {}
 }

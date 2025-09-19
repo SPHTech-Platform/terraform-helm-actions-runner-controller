@@ -32,13 +32,13 @@ locals {
 
     container_mode_type        = var.container_mode_type
     listener_template_spec     = yamlencode(var.listener_podspec_map)
-    template_spec              = var.custom_podspec_map != {} ? yamlencode(var.custom_podspec_map) : yamlencode(local.template_spec)
+    template_spec              = yamlencode(local.template_spec)
     controller_service_account = yamlencode(var.controller_service_account)
   }
 
   template_spec = {
     metadata = {
-      labels = {}
+      labels = var.template_spec_metadata_labels
     }
     spec = {
       topologySpreadConstraints = var.topology_spread_constraints
