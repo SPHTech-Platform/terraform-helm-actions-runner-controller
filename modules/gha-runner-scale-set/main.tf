@@ -48,14 +48,14 @@ locals {
 
       initContainers = [
         {
-          name    = "init-dind-externals",
-          image   = "ghcr.io/actions/actions-runner:latest",
-          command = ["cp", "-r", "/home/runner/externals/.", "/home/runner/tmpDir/"],
+          name    = "init-dind-externals"
+          image   = "ghcr.io/actions/actions-runner:latest"
+          command = ["cp", "-r", "/home/runner/externals/.", "/home/runner/tmpDir/"]
           volumeMounts = [
             {
               name      = "dind-externals",
               mountPath = "/home/runner/tmpDir"
-            }
+            },
           ]
         },
         {
@@ -64,7 +64,7 @@ locals {
           args  = ["dockerd", "--host=unix:///var/run/docker.sock", "--group=$(DOCKER_GROUP_GID)"]
           env = [
             {
-              name  = "DOCKER_GROUP_GID",
+              name  = "DOCKER_GROUP_GID"
               value = "123"
             },
           ]
@@ -82,17 +82,17 @@ locals {
           }
           volumeMounts = [
             {
-              name      = "work",
+              name      = "work"
               mountPath = "/home/runner/_work"
             },
             {
-              name      = "dind-sock",
+              name      = "dind-sock"
               mountPath = "/run/docker"
             },
             {
-              name      = "dind-externals",
+              name      = "dind-externals"
               mountPath = "/home/runner/externals"
-            }
+            },
           ]
         }
       ]
@@ -104,7 +104,7 @@ locals {
           command = ["/home/runner/run.sh"]
           env = [
             {
-              name  = "DOCKER_HOST",
+              name  = "DOCKER_HOST"
               value = "unix:///var/run/docker.sock"
             },
             {
@@ -114,12 +114,12 @@ locals {
           ]
           volumeMounts = [
             {
-              name      = "work",
+              name      = "work"
               mountPath = "/home/runner/_work"
             },
             {
-              name      = "dind-sock",
-              mountPath = "/var/run",
+              name      = "dind-sock"
+              mountPath = "/var/run"
               readOnly  = true
             },
           ]
