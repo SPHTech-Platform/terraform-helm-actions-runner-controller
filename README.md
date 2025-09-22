@@ -153,11 +153,14 @@ They are required for creating the necessary CRDs for deploying the runners.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.6, < 3.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 2.0.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.23 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.38.0 |
 
 ## Modules
 
@@ -165,11 +168,13 @@ No providers.
 |------|--------|---------|
 | <a name="module_action_runner_scale_set"></a> [action\_runner\_scale\_set](#module\_action\_runner\_scale\_set) | ./modules/gha-runner-scale-set | n/a |
 | <a name="module_action_runner_scale_set_controller"></a> [action\_runner\_scale\_set\_controller](#module\_action\_runner\_scale\_set\_controller) | ./modules/gha-runner-scale-set-controller | n/a |
-| <a name="module_crds"></a> [crds](#module\_crds) | rpadovani/helm-crds/kubectl | >= 1.0 |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [kubernetes_manifest.crds](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [http_http.yaml_file](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
 ## Inputs
 

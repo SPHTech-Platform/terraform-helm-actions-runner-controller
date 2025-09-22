@@ -1,13 +1,21 @@
-module "crds" {
-  source  = "rpadovani/helm-crds/kubectl"
-  version = ">= 1.0"
-
+locals {
   crds_urls = [
     "https://raw.githubusercontent.com/actions/actions-runner-controller/refs/tags/gha-runner-scale-set-${var.action_runner_scale_set_controller_chart_version}/charts/gha-runner-scale-set-controller/crds/actions.github.com_autoscalinglisteners.yaml",
     "https://raw.githubusercontent.com/actions/actions-runner-controller/refs/tags/gha-runner-scale-set-${var.action_runner_scale_set_controller_chart_version}/charts/gha-runner-scale-set-controller/crds/actions.github.com_autoscalingrunnersets.yaml",
     "https://raw.githubusercontent.com/actions/actions-runner-controller/refs/tags/gha-runner-scale-set-${var.action_runner_scale_set_controller_chart_version}/charts/gha-runner-scale-set-controller/crds/actions.github.com_ephemeralrunners.yaml",
     "https://raw.githubusercontent.com/actions/actions-runner-controller/refs/tags/gha-runner-scale-set-${var.action_runner_scale_set_controller_chart_version}/charts/gha-runner-scale-set-controller/crds/actions.github.com_ephemeralrunnersets.yaml",
   ]
+}
+
+data "http" "yaml_file" {
+  for_each = toset(local.crds_urls)
+  url      = each.value
+}
+
+resource "kubernetes_manifest" "crds" {
+  for_each = toset(local.crds_urls)
+
+  manifest = yamldecode(data.http.yaml_file[each.value].response_body)
 }
 
 module "action_runner_scale_set_controller" {
@@ -23,7 +31,7 @@ module "action_runner_scale_set_controller" {
   controller_topology_spread_constraints = var.controller_topology_spread_constraints
 
   depends_on = [
-    module.crds
+    kubernetes_manifest.crds
   ]
 }
 
