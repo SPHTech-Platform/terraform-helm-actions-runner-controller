@@ -60,6 +60,8 @@ module "action_runner_scale_set" {
 
   auth_method = var.auth_method
 
+  depends_on = [module.action_runner_scale_set_controller]
+
   min_runners = var.min_runners
   max_runners = var.max_runners
 
@@ -70,8 +72,4 @@ module "action_runner_scale_set" {
 
   template_spec_config_type     = var.runner_template_spec_config_type
   template_spec_metadata_labels = var.runner_template_spec_metadata_labels
-
-  depends_on = [
-    module.action_runner_scale_set_controller
-  ]
 }
