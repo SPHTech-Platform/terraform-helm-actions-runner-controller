@@ -188,6 +188,7 @@ They are required for creating the necessary CRDs for deploying the runners.
 | <a name="input_controller_node_selector"></a> [controller\_node\_selector](#input\_controller\_node\_selector) | Node selector for the controller pod | `any` | `{}` | no |
 | <a name="input_controller_tolerations"></a> [controller\_tolerations](#input\_controller\_tolerations) | Tolerations for the controller pod | `any` | `[]` | no |
 | <a name="input_controller_topology_spread_constraints"></a> [controller\_topology\_spread\_constraints](#input\_controller\_topology\_spread\_constraints) | Topology spread constraints for the controller pod | `any` | `[]` | no |
+| <a name="input_force_conflicts"></a> [force\_conflicts](#input\_force\_conflicts) | Force conflicts for Kubernetes resources | `bool` | `false` | no |
 | <a name="input_github_app_id"></a> [github\_app\_id](#input\_github\_app\_id) | GitHub App ID. This can't be set at the same time as github\_token | `string` | `""` | no |
 | <a name="input_github_app_installation_id"></a> [github\_app\_installation\_id](#input\_github\_app\_installation\_id) | GitHub App Installation ID. This can't be set at the same time as github\_token | `string` | `""` | no |
 | <a name="input_github_app_private_key"></a> [github\_app\_private\_key](#input\_github\_app\_private\_key) | The multiline string of your GitHub App's private key. This can't be set at the same time as github\_token | `string` | `""` | no |
@@ -206,6 +207,7 @@ They are required for creating the necessary CRDs for deploying the runners.
 | <a name="input_runner_tolerations"></a> [runner\_tolerations](#input\_runner\_tolerations) | Tolerations for the runner pods | `any` | `[]` | no |
 | <a name="input_runner_topology_spread_constraints"></a> [runner\_topology\_spread\_constraints](#input\_runner\_topology\_spread\_constraints) | Topology spread constraints for the runner pods | `any` | `[]` | no |
 | <a name="input_scale_set_release_name"></a> [scale\_set\_release\_name](#input\_scale\_set\_release\_name) | Helm release name for the scale set | `string` | `"gha-scale-set"` | no |
+| <a name="input_server_side_apply"></a> [server\_side\_apply](#input\_server\_side\_apply) | Enable server-side apply for Kubernetes resources | `bool` | `true` | no |
 
 ## Outputs
 

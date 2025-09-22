@@ -15,7 +15,9 @@ data "http" "yaml_file" {
 resource "kubernetes_manifest" "crds" {
   for_each = toset(local.crds_urls)
 
-  manifest = yamldecode(data.http.yaml_file[each.value].response_body)
+  manifest          = yamldecode(data.http.yaml_file[each.value].response_body)
+  server_side_apply = var.server_side_apply
+  force_conflicts   = var.force_conflicts
 }
 
 module "action_runner_scale_set_controller" {
