@@ -186,3 +186,9 @@ variable "namespace_override" {
   type        = string
   default     = ""
 }
+
+variable "skip_crds" {
+  description = "Whether to skip installing CRDs."
+  type        = bool
+  default     = false
+}

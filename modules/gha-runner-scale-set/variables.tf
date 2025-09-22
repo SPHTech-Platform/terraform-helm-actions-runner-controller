@@ -187,3 +187,9 @@ variable "affinity" {
   type        = any
   default     = {}
 }
+
+variable "template_spec_config_type" {
+  description = "Configuration type for the pod template spec."
+  type        = string
+  default     = "custom"
+}

@@ -105,7 +105,7 @@ listenerTemplate:
 #       image: example-sidecar
 
 ## template is the PodSpec for each runner Pod
-%{ if container_mode_type == "" }
+%{ if template_spec_config_type == "custom" }
 template:
   ${indent(2,template_spec)}
   ## template.spec will be modified if you change the container mode
