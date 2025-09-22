@@ -164,6 +164,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_action_runner_scale_set"></a> [action\_runner\_scale\_set](#module\_action\_runner\_scale\_set) | ./modules/gha-runner-scale-set | n/a |
 | <a name="module_action_runner_scale_set_controller"></a> [action\_runner\_scale\_set\_controller](#module\_action\_runner\_scale\_set\_controller) | ./modules/gha-runner-scale-set-controller | n/a |
+| <a name="module_crds"></a> [crds](#module\_crds) | rpadovani/helm-crds/kubectl | >= 1.0 |
 
 ## Resources
 
