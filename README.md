@@ -153,6 +153,7 @@ They are required for creating the necessary CRDs for deploying the runners.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.6, < 3.0 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 2.0.0 |
 
 ## Providers
 
