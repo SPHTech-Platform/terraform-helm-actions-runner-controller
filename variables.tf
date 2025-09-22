@@ -133,6 +133,12 @@ variable "controller_topology_spread_constraints" {
   default     = []
 }
 
+variable "runner_template_spec_config_type" {
+  description = "Configuration type for the pod template spec."
+  type        = string
+  default     = "custom"
+}
+
 variable "runner_template_spec_metadata_labels" {
   description = "Labels to be added to the pod template metadata."
   type        = any
@@ -161,4 +167,34 @@ variable "runner_topology_spread_constraints" {
   description = "Topology spread constraints for the runner pods"
   type        = any
   default     = []
+}
+
+variable "server_side_apply" {
+  description = "Enable server-side apply for Kubernetes resources"
+  type        = bool
+  default     = true
+}
+
+variable "force_conflicts" {
+  description = "Force conflicts for Kubernetes resources"
+  type        = bool
+  default     = false
+}
+
+variable "force_new" {
+  description = "Force new resource creation for Kubernetes resources"
+  type        = bool
+  default     = false
+}
+
+variable "apply_only" {
+  description = "Apply only changes for Kubernetes resources"
+  type        = bool
+  default     = false
+}
+
+variable "skip_crds" {
+  description = "Whether to skip installing CRDs."
+  type        = bool
+  default     = true
 }

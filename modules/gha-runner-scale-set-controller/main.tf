@@ -5,6 +5,7 @@ resource "helm_release" "scale_set_controller_release" {
   version          = var.chart_version
   namespace        = var.chart_namespace
   create_namespace = var.chart_namespace_create
+  skip_crds        = var.skip_crds
 
   max_history = var.max_history
   timeout     = var.chart_timeout

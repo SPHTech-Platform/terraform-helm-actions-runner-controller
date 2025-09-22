@@ -32,6 +32,7 @@ locals {
 
     container_mode_type        = var.container_mode_type
     listener_template_spec     = yamlencode(var.listener_podspec_map)
+    template_spec_config_type  = var.template_spec_config_type
     template_spec              = yamlencode(local.template_spec)
     controller_service_account = yamlencode(var.controller_service_account)
   }
