@@ -211,7 +211,7 @@ They are required for creating the necessary CRDs for deploying the runners.
 | <a name="input_runner_topology_spread_constraints"></a> [runner\_topology\_spread\_constraints](#input\_runner\_topology\_spread\_constraints) | Topology spread constraints for the runner pods | `any` | `[]` | no |
 | <a name="input_scale_set_release_name"></a> [scale\_set\_release\_name](#input\_scale\_set\_release\_name) | Helm release name for the scale set | `string` | `"gha-scale-set"` | no |
 | <a name="input_server_side_apply"></a> [server\_side\_apply](#input\_server\_side\_apply) | Enable server-side apply for Kubernetes resources | `bool` | `true` | no |
-| <a name="input_skip_crds"></a> [skip\_crds](#input\_skip\_crds) | Whether to skip installing CRDs. | `bool` | `false` | no |
+| <a name="input_skip_crds"></a> [skip\_crds](#input\_skip\_crds) | Whether to skip installing CRDs. | `bool` | `true` | no |
 
 ## Outputs
 
