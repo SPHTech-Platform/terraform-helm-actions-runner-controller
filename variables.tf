@@ -168,3 +168,9 @@ variable "runner_topology_spread_constraints" {
   type        = any
   default     = []
 }
+
+variable "runner_container_mode_type" {
+  description = "Container mode type for the runner pods, set to 'dind' to enable docker in docker or set to 'kubernetes' to use kubernetes mode or set null to use custom configs"
+  type        = string
+  default     = "dind"
+}

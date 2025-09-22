@@ -153,14 +153,10 @@ They are required for creating the necessary CRDs for deploying the runners.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.6, < 3.0 |
-| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.19 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
-| <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.19.0 |
+No providers.
 
 ## Modules
 
@@ -171,10 +167,7 @@ They are required for creating the necessary CRDs for deploying the runners.
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [kubectl_manifest.crds](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
-| [http_http.yaml_file](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
+No resources.
 
 ## Inputs
 
@@ -182,15 +175,12 @@ They are required for creating the necessary CRDs for deploying the runners.
 |------|-------------|------|---------|:--------:|
 | <a name="input_action_runner_scale_set_chart_version"></a> [action\_runner\_scale\_set\_chart\_version](#input\_action\_runner\_scale\_set\_chart\_version) | ARC Scale set chart version | `string` | `"0.12.1"` | no |
 | <a name="input_action_runner_scale_set_controller_chart_version"></a> [action\_runner\_scale\_set\_controller\_chart\_version](#input\_action\_runner\_scale\_set\_controller\_chart\_version) | ARC Controller chart version | `string` | `"0.12.1"` | no |
-| <a name="input_apply_only"></a> [apply\_only](#input\_apply\_only) | Apply only changes for Kubernetes resources | `bool` | `false` | no |
 | <a name="input_auth_method"></a> [auth\_method](#input\_auth\_method) | values for auth method | `string` | `"github-app"` | no |
 | <a name="input_controller_affinity"></a> [controller\_affinity](#input\_controller\_affinity) | Affinity for the controller pod | `any` | `{}` | no |
 | <a name="input_controller_helm_release_name"></a> [controller\_helm\_release\_name](#input\_controller\_helm\_release\_name) | Helm release name for the controller | `string` | `"gha-controller"` | no |
 | <a name="input_controller_node_selector"></a> [controller\_node\_selector](#input\_controller\_node\_selector) | Node selector for the controller pod | `any` | `{}` | no |
 | <a name="input_controller_tolerations"></a> [controller\_tolerations](#input\_controller\_tolerations) | Tolerations for the controller pod | `any` | `[]` | no |
 | <a name="input_controller_topology_spread_constraints"></a> [controller\_topology\_spread\_constraints](#input\_controller\_topology\_spread\_constraints) | Topology spread constraints for the controller pod | `any` | `[]` | no |
-| <a name="input_force_conflicts"></a> [force\_conflicts](#input\_force\_conflicts) | Force conflicts for Kubernetes resources | `bool` | `false` | no |
-| <a name="input_force_new"></a> [force\_new](#input\_force\_new) | Force new resource creation for Kubernetes resources | `bool` | `false` | no |
 | <a name="input_github_app_id"></a> [github\_app\_id](#input\_github\_app\_id) | GitHub App ID. This can't be set at the same time as github\_token | `string` | `""` | no |
 | <a name="input_github_app_installation_id"></a> [github\_app\_installation\_id](#input\_github\_app\_installation\_id) | GitHub App Installation ID. This can't be set at the same time as github\_token | `string` | `""` | no |
 | <a name="input_github_app_private_key"></a> [github\_app\_private\_key](#input\_github\_app\_private\_key) | The multiline string of your GitHub App's private key. This can't be set at the same time as github\_token | `string` | `""` | no |
@@ -202,6 +192,7 @@ They are required for creating the necessary CRDs for deploying the runners.
 | <a name="input_max_runners"></a> [max\_runners](#input\_max\_runners) | Maximum number of runners to scale to | `number` | `3` | no |
 | <a name="input_min_runners"></a> [min\_runners](#input\_min\_runners) | Minimum number of runners to scale to | `number` | `1` | no |
 | <a name="input_runner_affinity"></a> [runner\_affinity](#input\_runner\_affinity) | Affinity for the runner pods | `any` | `{}` | no |
+| <a name="input_runner_container_mode_type"></a> [runner\_container\_mode\_type](#input\_runner\_container\_mode\_type) | Container mode type for the runner pods, set to 'dind' to enable docker in docker or set to 'kubernetes' to use kubernetes mode or set null to use custom configs | `string` | `"dind"` | no |
 | <a name="input_runner_group"></a> [runner\_group](#input\_runner\_group) | Name of the runner group | `string` | n/a | yes |
 | <a name="input_runner_node_selector"></a> [runner\_node\_selector](#input\_runner\_node\_selector) | Node selector for the runner pods | `any` | `{}` | no |
 | <a name="input_runner_scale_set_name"></a> [runner\_scale\_set\_name](#input\_runner\_scale\_set\_name) | Name of the scale set | `string` | n/a | yes |
@@ -210,8 +201,6 @@ They are required for creating the necessary CRDs for deploying the runners.
 | <a name="input_runner_tolerations"></a> [runner\_tolerations](#input\_runner\_tolerations) | Tolerations for the runner pods | `any` | `[]` | no |
 | <a name="input_runner_topology_spread_constraints"></a> [runner\_topology\_spread\_constraints](#input\_runner\_topology\_spread\_constraints) | Topology spread constraints for the runner pods | `any` | `[]` | no |
 | <a name="input_scale_set_release_name"></a> [scale\_set\_release\_name](#input\_scale\_set\_release\_name) | Helm release name for the scale set | `string` | `"gha-scale-set"` | no |
-| <a name="input_server_side_apply"></a> [server\_side\_apply](#input\_server\_side\_apply) | Enable server-side apply for Kubernetes resources | `bool` | `true` | no |
-| <a name="input_skip_crds"></a> [skip\_crds](#input\_skip\_crds) | Whether to skip installing CRDs. | `bool` | `true` | no |
 
 ## Outputs
 
