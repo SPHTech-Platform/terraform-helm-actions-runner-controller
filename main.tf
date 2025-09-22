@@ -12,12 +12,15 @@ data "http" "yaml_file" {
   url      = each.value
 }
 
-resource "kubernetes_manifest" "crds" {
+resource "kubectl_manifest" "crds" {
   for_each = toset(local.crds_urls)
 
-  manifest          = yamldecode(data.http.yaml_file[each.value].response_body)
+  yaml_body = data.http.yaml_file[each.value].response_body
+
+  force_new         = var.force_new
   server_side_apply = var.server_side_apply
   force_conflicts   = var.force_conflicts
+  apply_only        = var.apply_only
 }
 
 module "action_runner_scale_set_controller" {
@@ -63,6 +66,7 @@ module "action_runner_scale_set" {
   topology_spread_constraints = var.runner_topology_spread_constraints
   affinity                    = var.runner_affinity
 
+  template_spec_config_type     = var.runner_template_spec_config_type
   template_spec_metadata_labels = var.runner_template_spec_metadata_labels
 
   depends_on = [
