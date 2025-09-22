@@ -168,33 +168,3 @@ variable "runner_topology_spread_constraints" {
   type        = any
   default     = []
 }
-
-variable "server_side_apply" {
-  description = "Enable server-side apply for Kubernetes resources"
-  type        = bool
-  default     = true
-}
-
-variable "force_conflicts" {
-  description = "Force conflicts for Kubernetes resources"
-  type        = bool
-  default     = false
-}
-
-variable "force_new" {
-  description = "Force new resource creation for Kubernetes resources"
-  type        = bool
-  default     = false
-}
-
-variable "apply_only" {
-  description = "Apply only changes for Kubernetes resources"
-  type        = bool
-  default     = false
-}
-
-variable "skip_crds" {
-  description = "Whether to skip installing CRDs."
-  type        = bool
-  default     = true
-}
