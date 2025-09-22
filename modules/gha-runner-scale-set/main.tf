@@ -31,10 +31,32 @@ locals {
     github_token               = var.github_token
 
     container_mode_type        = var.container_mode_type
-    listener_template_spec     = yamlencode(var.listener_podspec_map)
+    listener_template_spec     = yamlencode(local.listener_template_spec)
     template_spec_config_type  = var.template_spec_config_type
     template_spec              = yamlencode(local.template_spec)
     controller_service_account = yamlencode(var.controller_service_account)
+  }
+
+  listener_template_spec = {
+    metadata = {
+      annotations = {
+        "prometheus.io/scrape" = "true"
+        "prometheus.io/path"   = "/metrics"
+        "prometheus.io/port"   = "8080"
+      }
+      labels = {}
+    }
+    spec = {
+      nodeSelector = var.node_selector
+      tolerations  = var.tolerations
+      affinity     = var.affinity
+
+      containers = [
+        {
+          name = "listener"
+        }
+      ]
+    }
   }
 
   template_spec = {

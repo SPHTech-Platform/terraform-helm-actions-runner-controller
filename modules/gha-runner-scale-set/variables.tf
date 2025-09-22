@@ -123,31 +123,6 @@ variable "runner_scale_set_name" {
   default     = "arc-runner-set"
 }
 
-variable "listener_podspec_map" {
-  description = "Listener podspec map"
-  type = object({
-    metadata = any
-    spec     = any
-  })
-  default = {
-    metadata = {
-      annotations = {
-        "prometheus.io/scrape" = "true"
-        "prometheus.io/path"   = "/metrics"
-        "prometheus.io/port"   = "8080"
-      }
-      labels = {}
-    }
-    spec = {
-      containers = [
-        {
-          name = "listener"
-        }
-      ]
-    }
-  }
-}
-
 # Default spec map for dind container mode
 variable "template_spec_metadata_labels" {
   description = "Labels to be added to the pod template metadata."
