@@ -192,3 +192,9 @@ variable "apply_only" {
   type        = bool
   default     = false
 }
+
+variable "skip_crds" {
+  description = "Whether to skip installing CRDs."
+  type        = bool
+  default     = false
+}

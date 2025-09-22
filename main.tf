@@ -35,8 +35,10 @@ module "action_runner_scale_set_controller" {
   controller_affinity                    = var.controller_affinity
   controller_topology_spread_constraints = var.controller_topology_spread_constraints
 
+  skip_crds = var.skip_crds
+
   depends_on = [
-    kubernetes_manifest.crds
+    kubectl_manifest.crds
   ]
 }
 
