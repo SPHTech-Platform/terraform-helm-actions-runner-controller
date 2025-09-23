@@ -88,7 +88,7 @@ locals {
           env = [
             {
               name  = "DOCKER_GROUP_GID"
-              value = "123"
+              value = "1001"
             },
           ]
           securityContext = {
@@ -101,7 +101,7 @@ locals {
             }
             initialDelaySeconds = 0
             failureThreshold    = 24
-            periodSeconds       = 10
+            periodSeconds       = 5
           }
           volumeMounts = [
             {
@@ -110,7 +110,7 @@ locals {
             },
             {
               name      = "dind-sock"
-              mountPath = "/run/docker"
+              mountPath = "/var/run"
             },
             {
               name      = "dind-externals"
