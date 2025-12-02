@@ -134,6 +134,10 @@ locals {
               name  = "RUNNER_WAIT_FOR_DOCKER_IN_SECONDS"
               value = "120"
             },
+            {
+              name  = "NPM_CONFIG_IGNORE_SCRIPTS",
+              value = "1"
+            },
           ]
           volumeMounts = [
             {
