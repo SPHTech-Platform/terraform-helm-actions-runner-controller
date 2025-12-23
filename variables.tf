@@ -174,3 +174,28 @@ variable "runner_container_mode_type" {
   type        = string
   default     = "dind"
 }
+
+variable "runner_resources" {
+  description = "Compute resources (CPU and Memory) for the runner requests and limits"
+  type = object({
+    requests = object({
+      cpu    = string
+      memory = string
+    })
+    limits = object({
+      cpu    = string
+      memory = string
+    })
+  })
+
+  default = {
+    requests = {
+      cpu    = "1"
+      memory = "2Gi"
+    }
+    limits = {
+      cpu    = "1"
+      memory = "2Gi"
+    }
+  }
+}
