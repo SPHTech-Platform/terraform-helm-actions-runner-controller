@@ -5,6 +5,10 @@ module "action_runner_scale_set_controller" {
 
   release_name = var.controller_helm_release_name
 
+  controller_node_selector               = var.controller_node_selector
+  controller_tolerations                 = var.controller_tolerations
+  controller_affinity                    = var.controller_affinity
+  controller_topology_spread_constraints = var.controller_topology_spread_constraints
 }
 
 module "action_runner_scale_set" {
@@ -29,4 +33,14 @@ module "action_runner_scale_set" {
 
   min_runners = var.min_runners
   max_runners = var.max_runners
+
+  node_selector               = var.runner_node_selector
+  tolerations                 = var.runner_tolerations
+  topology_spread_constraints = var.runner_topology_spread_constraints
+  affinity                    = var.runner_affinity
+
+  template_spec_config_type     = var.runner_template_spec_config_type
+  template_spec_metadata_labels = var.runner_template_spec_metadata_labels
+
+  container_mode_type = var.runner_container_mode_type
 }

@@ -1,13 +1,13 @@
 variable "action_runner_scale_set_controller_chart_version" {
   description = "ARC Controller chart version"
   type        = string
-  default     = "0.9.3"
+  default     = "0.12.1"
 }
 
 variable "action_runner_scale_set_chart_version" {
   description = "ARC Scale set chart version"
   type        = string
-  default     = "0.9.3"
+  default     = "0.12.1"
 }
 
 variable "controller_helm_release_name" {
@@ -107,4 +107,70 @@ variable "github_token" {
   description = "Enterprise Runners' pat token of an enterprise admin user"
   type        = string
   default     = ""
+}
+
+variable "controller_node_selector" {
+  description = "Node selector for the controller pod"
+  type        = any
+  default     = {}
+}
+
+variable "controller_tolerations" {
+  description = "Tolerations for the controller pod"
+  type        = any
+  default     = []
+}
+
+variable "controller_affinity" {
+  description = "Affinity for the controller pod"
+  type        = any
+  default     = {}
+}
+
+variable "controller_topology_spread_constraints" {
+  description = "Topology spread constraints for the controller pod"
+  type        = any
+  default     = []
+}
+
+variable "runner_template_spec_config_type" {
+  description = "Configuration type for the pod template spec."
+  type        = string
+  default     = "custom"
+}
+
+variable "runner_template_spec_metadata_labels" {
+  description = "Labels to be added to the pod template metadata."
+  type        = any
+  default     = {}
+}
+
+variable "runner_node_selector" {
+  description = "Node selector for the runner pods"
+  type        = any
+  default     = {}
+}
+
+variable "runner_tolerations" {
+  description = "Tolerations for the runner pods"
+  type        = any
+  default     = []
+}
+
+variable "runner_affinity" {
+  description = "Affinity for the runner pods"
+  type        = any
+  default     = {}
+}
+
+variable "runner_topology_spread_constraints" {
+  description = "Topology spread constraints for the runner pods"
+  type        = any
+  default     = []
+}
+
+variable "runner_container_mode_type" {
+  description = "Container mode type for the runner pods, set to 'dind' to enable docker in docker or set to 'kubernetes' to use kubernetes mode or set null to use custom configs"
+  type        = string
+  default     = "dind"
 }

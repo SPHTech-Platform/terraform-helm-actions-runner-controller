@@ -29,14 +29,17 @@ locals {
     service_account_annotations = jsonencode(var.service_account_annotations)
     service_account_name        = var.service_account_name
 
-    controller_pod_annotations      = jsonencode(var.controller_pod_annotations)
-    controller_pod_security_context = jsonencode(var.controller_pod_security_context)
-    controller_security_context     = jsonencode(var.controller_security_context)
-    controller_resources            = jsonencode(var.controller_resources)
-    controller_node_selector        = jsonencode(var.controller_node_selector)
-    controller_tolerations          = jsonencode(var.controller_tolerations)
-    controller_affinity             = jsonencode(var.controller_affinity)
-    priority_class_name             = var.controller_priority_class_name
+    controller_pod_annotations             = jsonencode(var.controller_pod_annotations)
+    controller_pod_security_context        = jsonencode(var.controller_pod_security_context)
+    controller_security_context            = jsonencode(var.controller_security_context)
+    controller_resources                   = jsonencode(var.controller_resources)
+    controller_node_selector               = jsonencode(var.controller_node_selector)
+    controller_tolerations                 = jsonencode(var.controller_tolerations)
+    controller_affinity                    = jsonencode(var.controller_affinity)
+    controller_topology_spread_constraints = jsonencode(var.controller_topology_spread_constraints)
+    priority_class_name                    = var.controller_priority_class_name
 
+    runner_max_concurrent_reconciles = var.runner_max_concurrent_reconciles
+    namespace_override               = var.namespace_override
   }
 }
