@@ -43,4 +43,5 @@ module "action_runner_scale_set" {
   template_spec_metadata_labels = var.runner_template_spec_metadata_labels
 
   container_mode_type = var.runner_container_mode_type
+  runner_resources    = var.runner_resources
 }
