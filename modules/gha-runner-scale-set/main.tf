@@ -150,6 +150,16 @@ locals {
               readOnly  = true
             },
           ]
+          resources = {
+            requests = {
+              cpu    = var.runner_resources.requests.cpu
+              memory = var.runner_resources.requests.memory
+            }
+            limits = {
+              cpu    = var.runner_resources.limits.cpu
+              memory = var.runner_resources.limits.memory
+            }
+          }
         }
       ]
 
