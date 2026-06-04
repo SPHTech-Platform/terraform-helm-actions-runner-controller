@@ -39,6 +39,7 @@ locals {
     template_spec_metadata_annotations     = yamlencode(var.template_spec_metadata_annotations)
     has_template_spec_metadata_labels      = length(var.template_spec_metadata_labels) > 0
     has_template_spec_metadata_annotations = length(var.template_spec_metadata_annotations) > 0
+    runner_resources                       = yamlencode(var.runner_resources)
   }
 
   listener_template_spec = {

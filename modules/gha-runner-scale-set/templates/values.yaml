@@ -109,8 +109,8 @@ listenerTemplate:
 template:
   ${indent(2,template_spec)}
 %{ else }
-%{ if has_template_spec_metadata_annotations || has_template_spec_metadata_labels }
 template:
+%{ if has_template_spec_metadata_annotations || has_template_spec_metadata_labels }
   metadata:
 %{ if has_template_spec_metadata_annotations }
     annotations:
@@ -121,6 +121,11 @@ template:
       ${indent(6, template_spec_metadata_labels)}
 %{ endif }
 %{ endif }
+  spec:
+    containers:
+    - name: runner
+      resources:
+        ${indent(8, runner_resources)}
 %{ endif }
 ## Optional controller service account that needs to have required Role and RoleBinding
 ## to operate this gha-runner-scale-set installation.
