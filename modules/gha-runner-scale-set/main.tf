@@ -30,11 +30,16 @@ locals {
     github_app_private_key     = var.github_app_private_key
     github_token               = var.github_token
 
-    container_mode_type        = var.container_mode_type
-    listener_template_spec     = yamlencode(local.listener_template_spec)
-    template_spec_config_type  = var.template_spec_config_type
-    template_spec              = yamlencode(local.template_spec)
-    controller_service_account = yamlencode(var.controller_service_account)
+    container_mode_type                    = var.container_mode_type
+    listener_template_spec                 = yamlencode(local.listener_template_spec)
+    template_spec_config_type              = var.template_spec_config_type
+    template_spec                          = yamlencode(local.template_spec)
+    controller_service_account             = yamlencode(var.controller_service_account)
+    template_spec_metadata_labels          = yamlencode(var.template_spec_metadata_labels)
+    template_spec_metadata_annotations     = yamlencode(var.template_spec_metadata_annotations)
+    has_template_spec_metadata_labels      = length(var.template_spec_metadata_labels) > 0
+    has_template_spec_metadata_annotations = length(var.template_spec_metadata_annotations) > 0
+    runner_resources                       = yamlencode(var.runner_resources)
   }
 
   listener_template_spec = {
@@ -61,7 +66,8 @@ locals {
 
   template_spec = {
     metadata = {
-      labels = var.template_spec_metadata_labels
+      labels      = var.template_spec_metadata_labels
+      annotations = var.template_spec_metadata_annotations
     }
     spec = {
       topologySpreadConstraints = var.topology_spread_constraints
