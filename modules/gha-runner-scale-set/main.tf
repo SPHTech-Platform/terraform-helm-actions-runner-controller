@@ -34,6 +34,7 @@ locals {
     listener_template_spec                 = yamlencode(local.listener_template_spec)
     template_spec_config_type              = var.template_spec_config_type
     template_spec                          = yamlencode(local.template_spec)
+    template_spec_dind                     = yamlencode(local.template_spec_dind)
     controller_service_account             = yamlencode(var.controller_service_account)
     template_spec_metadata_labels          = yamlencode(var.template_spec_metadata_labels)
     template_spec_metadata_annotations     = yamlencode(var.template_spec_metadata_annotations)
@@ -182,6 +183,62 @@ locals {
           name     = "dind-externals"
           emptyDir = {}
         },
+      ]
+    }
+  }
+
+  template_spec_dind = {
+    metadata = {
+      labels      = var.template_spec_metadata_labels
+      annotations = var.template_spec_metadata_annotations
+    }
+    spec = {
+      topologySpreadConstraints = var.topology_spread_constraints
+      nodeSelector              = var.node_selector
+      tolerations               = var.tolerations
+      affinity                  = var.affinity
+
+      containers = [
+        {
+          name    = "runner"
+          image   = "ghcr.io/actions/actions-runner:latest"
+          command = ["/home/runner/run.sh"]
+          env = [
+            {
+              name  = "DOCKER_HOST"
+              value = "unix:///var/run/docker.sock"
+            },
+            {
+              name  = "RUNNER_WAIT_FOR_DOCKER_IN_SECONDS"
+              value = "120"
+            },
+            {
+              name  = "NPM_CONFIG_IGNORE_SCRIPTS",
+              value = "1"
+            },
+          ]
+          volumeMounts = [
+            {
+              name      = "work"
+              mountPath = "/home/runner/_work"
+            },
+            {
+              name      = "dind-sock"
+              mountPath = "/var/run"
+              readOnly  = true
+            },
+          ]
+          resources = {
+            requests = {
+              cpu    = var.runner_resources.requests.cpu
+              memory = var.runner_resources.requests.memory
+            }
+            limits = {
+              cpu    = var.runner_resources.limits.cpu
+              memory = var.runner_resources.limits.memory
+            }
+          }
+        }
       ]
     }
   }

@@ -105,9 +105,12 @@ listenerTemplate:
 #       image: example-sidecar
 
 ## template is the PodSpec for each runner Pod
-%{ if container_mode_type == "" || container_mode_type == "dind" }
+%{ if container_mode_type == "" }
 template:
   ${indent(2,template_spec)}
+%{ else if container_mode_type == "dind" }
+template:
+  ${indent(2,template_spec_dind)}
 %{ else }
 template:
 %{ if has_template_spec_metadata_annotations || has_template_spec_metadata_labels }
