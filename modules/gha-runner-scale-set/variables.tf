@@ -130,6 +130,14 @@ variable "template_spec_metadata_labels" {
   default     = {}
 }
 
+variable "template_spec_metadata_annotations" {
+  description = "Annotations to be added to the pod template metadata."
+  type        = map(string)
+  default = {
+    "karpenter.sh/do-not-disrupt" = "true"
+  }
+}
+
 variable "controller_service_account" {
   description = "Service account for the controller."
   type        = map(any)

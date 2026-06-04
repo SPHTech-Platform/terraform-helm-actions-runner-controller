@@ -145,6 +145,14 @@ variable "runner_template_spec_metadata_labels" {
   default     = {}
 }
 
+variable "runner_template_spec_metadata_annotations" {
+  description = "Annotations to be added to the pod template metadata."
+  type        = map(string)
+  default = {
+    "karpenter.sh/do-not-disrupt" = "true"
+  }
+}
+
 variable "runner_node_selector" {
   description = "Node selector for the runner pods"
   type        = any
