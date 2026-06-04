@@ -105,7 +105,7 @@ listenerTemplate:
 #       image: example-sidecar
 
 ## template is the PodSpec for each runner Pod
-%{ if container_mode_type == "" }
+%{ if container_mode_type == "" || container_mode_type == "dind" }
 template:
   ${indent(2,template_spec)}
 %{ else }
@@ -124,6 +124,7 @@ template:
   spec:
     containers:
     - name: runner
+      image: "ghcr.io/actions/actions-runner:latest"
       resources:
         ${indent(8, runner_resources)}
 %{ endif }
