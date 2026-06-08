@@ -109,6 +109,10 @@ listenerTemplate:
 template:
   ${indent(2,template_spec)}
 %{ else }
+%{ if container_mode_type == "dind" }
+template:
+  ${indent(2,template_spec_dind)}
+%{ else }
 template:
 %{ if has_template_spec_metadata_annotations || has_template_spec_metadata_labels }
   metadata:
@@ -127,6 +131,7 @@ template:
       image: "ghcr.io/actions/actions-runner:latest"
       resources:
         ${indent(8, runner_resources)}
+%{ endif }
 %{ endif }
 ## Optional controller service account that needs to have required Role and RoleBinding
 ## to operate this gha-runner-scale-set installation.
